@@ -11,6 +11,7 @@
     name: oracle_java
     description: Oracle Java YUM repo
     baseurl: "{{ oracle_java_yumrepo_url }}"
+    gpgcheck: no
     params: "{{ oracle_java_yumrepo_params }}"
   when: oracle_java_yumrepo_url | length > 0
   tags:
