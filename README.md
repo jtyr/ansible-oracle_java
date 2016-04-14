@@ -11,13 +11,13 @@ one for which the `/usr/bin/` links will be created. All Java packages not
 managed by this role will be automatically uninstalled.
 
 
-Example
--------
+Examples
+--------
 
 ```
 ---
 
-# Example of how to install default version (jdk-1.7.0_71)
+# Example of how to install default version (jdk-1.8.0_77)
 - hosts: myhost1
   roles:
     - role: oracle_java
@@ -40,11 +40,11 @@ Example
       oracle_java_distribution: jre
       oracle_java_version_minor: 8
       oracle_java_version_update: 25
+      oracle_java_default: yes
     - role: oracle_java
       oracle_java_distribution: jdk
-      oracle_java_version_minor: 7
+      oracle_java_version_minor: 8
       oracle_java_version_update: 71
-      oracle_java_default: no
       oracle_java_finish: yes
 
 # Example of how to uninstall all Java packages
@@ -62,6 +62,12 @@ Role variables
 List of variables used by the role:
 
 ```
+# URL to the Java YUM repo (if empty, no repo file is created)
+oracle_java_yumrepo_url: ""
+
+# Additional YUM repo params
+oracle_java_yumrepo_params: {}
+
 # Default Java distribution [jdk|jre|none]
 oracle_java_distribution: jdk
 
@@ -69,19 +75,31 @@ oracle_java_distribution: jdk
 oracle_java_version_major: 1
 
 # Default minor version
-oracle_java_version_minor: 7
+oracle_java_version_minor: 8
 
 # Default patch version
 oracle_java_version_patch: 0
 
 # Default update version
-oracle_java_version_update: 71
+oracle_java_version_update: 77
 
 # Indicates whether this Java versin should be set as default alternative
-oracle_java_default: false
+oracle_java_default: no
 
 # Flag which triggers the package cleaning
-oracle_java_finish: false
+oracle_java_finish: no
+
+# Version as a string
+oracle_java_version_string: '{{ oracle_java_version_major }}.{{ oracle_java_version_minor }}.{{ oracle_java_version_patch }}_{{ oracle_java_version_update }}'
+
+# Directory name
+oracle_java_version_dir: '{{ oracle_java_distribution }}{{ oracle_java_version_string }}'
+
+# Java8 has the version as part of the package name
+oracle_java_distribution_string: '{{ oracle_java_distribution + oracle_java_version_string if oracle_java_version_minor == 8 else oracle_java_distribution }}'
+
+# Alternatives priority
+oracle_java_version_priority: '{{ oracle_java_version_major}}{{ "%02d" % oracle_java_version_minor }}{{ "%02d" % oracle_java_version_patch }}{{ "%03d" % oracle_java_version_update }}'
 ```
 
 

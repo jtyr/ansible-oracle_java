@@ -1,25 +1,31 @@
 ---
 
-# Default Java distribution [jdk|jre]
+# URL to the Java YUM repo (if empty, no repo file is created)
+oracle_java_yumrepo_url: ""
+
+# Additional YUM repo params
+oracle_java_yumrepo_params: {}
+
+# Default Java distribution [jdk|jre|none]
 oracle_java_distribution: jdk
 
 # Default major version
 oracle_java_version_major: 1
 
 # Default minor version
-oracle_java_version_minor: 7
+oracle_java_version_minor: 8
 
 # Default patch version
 oracle_java_version_patch: 0
 
 # Default update version
-oracle_java_version_update: 71
+oracle_java_version_update: 77
 
 # Indicates whether this Java versin should be set as default alternative
-oracle_java_default: false
+oracle_java_default: no
 
 # Flag which triggers the package cleaning
-oracle_java_finish: false
+oracle_java_finish: no
 
 # Version as a string
 oracle_java_version_string: '{{ oracle_java_version_major }}.{{ oracle_java_version_minor }}.{{ oracle_java_version_patch }}_{{ oracle_java_version_update }}'

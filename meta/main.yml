@@ -4,7 +4,7 @@ galaxy_info:
   author: Jiri Tyr
   description: Ansible role which installs a particulat version of Oracle Java
   license: MIT
-  min_ansible_version: 1.7
+  min_ansible_version: 2.1
   platforms:
     - name: EL
       versions:
